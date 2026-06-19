@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Databases (regenerated from fixtures; never commit)
+*.db
+*.db-wal
+*.db-shm
+
+# Secrets — never commit API keys
+.env
+*.key
+
+# Node (web/)
+node_modules/
+dist/
+
+# OS
+.DS_Store

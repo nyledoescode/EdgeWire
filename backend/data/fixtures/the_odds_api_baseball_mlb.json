@@ -1,0 +1,153 @@
+[
+  {
+    "id": "e1a2b3c4d5e6f70010000000000000a1",
+    "sport_key": "baseball_mlb",
+    "sport_title": "MLB",
+    "commence_time": "2026-06-15T23:10:00Z",
+    "home_team": "New York Yankees",
+    "away_team": "Boston Red Sox",
+    "bookmakers": [
+      {
+        "key": "pinnacle",
+        "title": "Pinnacle",
+        "last_update": "2026-06-15T22:00:05Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-15T22:00:05Z",
+            "outcomes": [
+              { "name": "New York Yankees", "price": -148 },
+              { "name": "Boston Red Sox", "price": 136 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-06-15T22:00:05Z",
+            "outcomes": [
+              { "name": "New York Yankees", "price": 128, "point": -1.5 },
+              { "name": "Boston Red Sox", "price": -140, "point": 1.5 }
+            ]
+          },
+          {
+            "key": "totals",
+            "last_update": "2026-06-15T22:00:05Z",
+            "outcomes": [
+              { "name": "Over", "price": -105, "point": 8.5 },
+              { "name": "Under", "price": -107, "point": 8.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2026-06-15T22:01:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-15T22:01:00Z",
+            "outcomes": [
+              { "name": "New York Yankees", "price": -135 },
+              { "name": "Boston Red Sox", "price": 114 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-06-15T22:01:00Z",
+            "outcomes": [
+              { "name": "New York Yankees", "price": 132, "point": -1.5 },
+              { "name": "Boston Red Sox", "price": -156, "point": 1.5 }
+            ]
+          },
+          {
+            "key": "totals",
+            "last_update": "2026-06-15T22:01:00Z",
+            "outcomes": [
+              { "name": "Over", "price": -110, "point": 8.5 },
+              { "name": "Under", "price": -110, "point": 8.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2026-06-15T22:00:45Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-15T22:00:45Z",
+            "outcomes": [
+              { "name": "New York Yankees", "price": -142 },
+              { "name": "Boston Red Sox", "price": 120 }
+            ]
+          },
+          {
+            "key": "totals",
+            "last_update": "2026-06-15T22:00:45Z",
+            "outcomes": [
+              { "name": "Over", "price": -112, "point": 8.5 },
+              { "name": "Under", "price": -108, "point": 8.5 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "f2b3c4d5e6f7a80020000000000000b2",
+    "sport_key": "baseball_mlb",
+    "sport_title": "MLB",
+    "commence_time": "2026-06-16T01:40:00Z",
+    "home_team": "Los Angeles Dodgers",
+    "away_team": "San Francisco Giants",
+    "bookmakers": [
+      {
+        "key": "pinnacle",
+        "title": "Pinnacle",
+        "last_update": "2026-06-15T22:00:05Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-15T22:00:05Z",
+            "outcomes": [
+              { "name": "Los Angeles Dodgers", "price": -205 },
+              { "name": "San Francisco Giants", "price": 184 }
+            ]
+          },
+          {
+            "key": "totals",
+            "last_update": "2026-06-15T22:00:05Z",
+            "outcomes": [
+              { "name": "Over", "price": -103, "point": 7.5 },
+              { "name": "Under", "price": -109, "point": 7.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2026-06-15T22:02:10Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-15T22:02:10Z",
+            "outcomes": [
+              { "name": "Los Angeles Dodgers", "price": -190 },
+              { "name": "San Francisco Giants", "price": 160 }
+            ]
+          },
+          {
+            "key": "totals",
+            "last_update": "2026-06-15T22:02:10Z",
+            "outcomes": [
+              { "name": "Over", "price": -115, "point": 7.5 },
+              { "name": "Under", "price": -105, "point": 7.5 }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

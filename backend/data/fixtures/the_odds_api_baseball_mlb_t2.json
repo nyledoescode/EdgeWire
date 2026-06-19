@@ -1,0 +1,58 @@
+[
+  {
+    "id": "e1a2b3c4d5e6f70010000000000000a1",
+    "sport_key": "baseball_mlb",
+    "sport_title": "MLB",
+    "commence_time": "2026-06-15T23:10:00Z",
+    "home_team": "New York Yankees",
+    "away_team": "Boston Red Sox",
+    "bookmakers": [
+      {
+        "key": "pinnacle",
+        "title": "Pinnacle",
+        "last_update": "2026-06-15T23:05:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-15T23:05:00Z",
+            "outcomes": [
+              { "name": "New York Yankees", "price": -162 },
+              { "name": "Boston Red Sox", "price": 148 }
+            ]
+          },
+          {
+            "key": "totals",
+            "last_update": "2026-06-15T23:05:00Z",
+            "outcomes": [
+              { "name": "Over", "price": -110, "point": 8.0 },
+              { "name": "Under", "price": -110, "point": 8.0 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2026-06-15T23:06:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-15T23:06:00Z",
+            "outcomes": [
+              { "name": "New York Yankees", "price": -150 },
+              { "name": "Boston Red Sox", "price": 126 }
+            ]
+          },
+          {
+            "key": "totals",
+            "last_update": "2026-06-15T23:06:00Z",
+            "outcomes": [
+              { "name": "Over", "price": -115, "point": 8.0 },
+              { "name": "Under", "price": -105, "point": 8.0 }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
