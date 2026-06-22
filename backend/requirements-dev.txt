@@ -1,0 +1,3 @@
+# Runtime: stdlib only (sqlite3, urllib) — no runtime deps required.
+# Dev/test only:
+pytest>=8.0

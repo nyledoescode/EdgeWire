@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# EdgeWire data store (regenerated from fixtures; never commit DB files)
+data/*.db
+data/*.db-wal
+data/*.db-shm
+
+# Secrets — never commit API keys
+.env
+*.key

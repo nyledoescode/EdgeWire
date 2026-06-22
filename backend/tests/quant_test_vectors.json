@@ -1,0 +1,156 @@
+{
+  "odds_conversion": [
+    {
+      "american": -110,
+      "decimal": 1.909091,
+      "implied_prob": 0.52381
+    },
+    {
+      "american": 150,
+      "decimal": 2.5,
+      "implied_prob": 0.4
+    },
+    {
+      "american": -200,
+      "decimal": 1.5,
+      "implied_prob": 0.666667
+    },
+    {
+      "american": 120,
+      "decimal": 2.2,
+      "implied_prob": 0.454545
+    }
+  ],
+  "decimal_to_american": [
+    {
+      "decimal": 1.909091,
+      "american": -110
+    },
+    {
+      "decimal": 2.5,
+      "american": 150
+    },
+    {
+      "decimal": 1.5625,
+      "american": -178
+    },
+    {
+      "decimal": 1.666667,
+      "american": -150
+    }
+  ],
+  "devig_2way_-110_-110": {
+    "fair": [
+      0.5,
+      0.5
+    ],
+    "hold_pct": 4.7619
+  },
+  "devig_2way_-200_+170": {
+    "fair": [
+      0.642857,
+      0.357143
+    ],
+    "hold_pct": 3.7037
+  },
+  "devig_3way_+150_+220_+180": {
+    "fair": [
+      0.373957,
+      0.292154,
+      0.33389
+    ],
+    "hold_pct": 6.9643
+  },
+  "devig_additive_-200_+170": {
+    "fair": [
+      0.648148,
+      0.351852
+    ]
+  },
+  "consensus_nba_home": {
+    "median": 0.619,
+    "mad": 0.004500000000000004,
+    "robust_z": {
+      "pinnacle": -1.1991,
+      "draftkings": 0.1499,
+      "fanduel": -0.1499,
+      "softx": 6.1454
+    },
+    "excluded": [
+      "softx"
+    ],
+    "consensus_fair_prob": 0.615
+  },
+  "leave_one_out_ev": {
+    "books_home_fairprob_weight": {
+      "pinnacle": [0.611, 3.0],
+      "draftkings": [0.620, 1.5],
+      "fanduel": [0.618, 1.5],
+      "caesars": [0.624, 1.5]
+    },
+    "full_consensus": 0.6168,
+    "loo_exclude_fanduel": 0.6165,
+    "grade_fanduel_home_offer_american": -140,
+    "grade_fanduel_home_offer_decimal": 1.714286,
+    "ev_vs_loo_pct": 5.6857
+  },
+  "ev_examples": [
+    {
+      "fair_prob": 0.385,
+      "offer_american": 180,
+      "offer_decimal": 2.8,
+      "ev_pct": 7.8,
+      "is_plus_ev_thr3": true
+    },
+    {
+      "fair_prob": 0.385,
+      "offer_american": 150,
+      "offer_decimal": 2.5,
+      "ev_pct": -3.75,
+      "is_plus_ev_thr3": false
+    }
+  ],
+  "kelly_quarter_p0.385_+180": 0.010833,
+  "clv_example": {
+    "p_bet": 0.615,
+    "p_close": 0.64,
+    "d_bet": 1.666667,
+    "d_close_fair": 1.5625,
+    "clv_prob": 0.025,
+    "beat_close": true,
+    "clv_pct": 6.6667,
+    "ev_vs_close_pct": 6.6667,
+    "clv_cents": 28
+  },
+  "wilson_ci": [
+    {
+      "k": 58,
+      "n": 100,
+      "ci95": [
+        0.4821,
+        0.672
+      ]
+    },
+    {
+      "k": 17,
+      "n": 30,
+      "ci95": [
+        0.392,
+        0.7262
+      ]
+    }
+  ],
+  "movement_totals_over": {
+    "p_open": 0.5,
+    "p_now": 0.469641,
+    "move_prob": -0.030359
+  },
+  "steam_dog_ml": {
+    "p_start": 0.383562,
+    "p_end": 0.434397,
+    "median_delta": 0.050836,
+    "breadth": "6/8",
+    "window_min": 8,
+    "flagged": true
+  }
+}
