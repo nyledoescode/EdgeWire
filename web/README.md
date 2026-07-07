@@ -41,6 +41,35 @@ Single swap point: `src/api/client.ts`.
 3. Response shapes are defined in `src/types.ts` and documented in
    `API_CONTRACT.md` — backend should match these (or send deltas).
 
+## Deploying to Vercel
+
+The app deploys to Vercel as a **static Vite SPA**. Config lives in `web/vercel.json`.
+
+**Vercel project settings** (Import → configure once):
+- **Root Directory:** `web` (the app is a subfolder of the `nyledoescode/EdgeWire` monorepo)
+- **Framework Preset:** Vite (auto-detected)
+- **Build Command:** `npm run build`  (runs `tsc -b && vite build`)
+- **Output Directory:** `dist`
+- **Install Command:** `npm ci`
+- **SPA rewrite:** handled by `vercel.json` — every non-`/api/` path rewrites to
+  `/index.html` so client-side routes (`/ev`, `/movement`, `/track-record`,
+  `/pricing`) resolve on hard-refresh / deep link. `/api/*` is left untouched so
+  a hosted API can be added later without a config change.
+
+**Environment variables:**
+- **Leave `VITE_USE_API` UNSET (or `false`) in the Vercel build.** The public
+  deploy runs on illustrative mock fixtures (`src/api/mockData.ts`) so the full
+  product renders with no backend dependency. Vite statically folds the unset
+  flag to the mock path at build time (the string `VITE_USE_API` doesn't even
+  appear in the bundle).
+- Only set `VITE_USE_API=true` + `VITE_API_PROXY=<api-origin>` **after** the
+  intelligence API is separately hosted and reachable from the browser. Until
+  then, keep it unset — a live flag with no reachable API would render an
+  error state on the public URL.
+
+Deploy is a one-shot once the token is set: `vercel --prod` from `web/` (or
+connect the Git repo with Root Directory `web` for push-to-deploy).
+
 ## Config
 `src/config.ts` holds pricing (Pro $49 / Elite $179; annual-equiv $39 / $149),
 hosted payment-link placeholders, and the load-bearing compliance copy.
@@ -55,5 +84,7 @@ Update pricing/links there — not in components.
   countdowns / "risk-free" / "guaranteed" copy
 
 ## Status
-Mock-data build. All data is illustrative, not live odds or advice. Needs:
-a linked repo, the live backend API, and hosted payment links from the lead.
+Mock-data build, **Vercel deploy-ready** (`vercel.json` + verified clean static
+`dist`, SPA rewrite tested). All data is illustrative, not live odds or advice.
+Still needs: hosted payment links from the lead, and (later) a separately-hosted
+live backend API before flipping `VITE_USE_API=true`.
