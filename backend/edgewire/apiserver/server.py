@@ -23,6 +23,7 @@ from urllib.parse import urlparse, parse_qs
 
 from ..db.database import connect
 from ..ingest.bootstrap import seed_if_empty
+from ..ingest.live import data_source_status
 from .. import screens
 
 # Sport enum (frontend) -> internal sport_key.
@@ -33,7 +34,10 @@ _SPORT_KEY = {
     "NHL": "icehockey_nhl",
 }
 
-# Spec 03 §5.3 capability flags — honest about the lean data tier.
+# Spec 03 §5.3 capability flags — honest about the lean data tier. These are the
+# STATIC methodology flags; the live/fixture mode, data freshness and remaining
+# quota are merged in per-request from data_source_status() so the endpoint always
+# tells the truth about the feed behind the numbers.
 _CAPABILITIES = {
     "splits_available": False,        # no betting-splits feed contracted
     "sharp_coverage": "partial",      # Pinnacle via eu region only
@@ -41,6 +45,26 @@ _CAPABILITIES = {
     "data_tier": "the_odds_api",
     "data_delay_note": "Consensus close is polled, not streamed — labeled best-effort.",
 }
+
+
+def _capabilities_payload() -> dict:
+    """Static capability flags + honest live data-source status (mode, freshness,
+    remaining quota, degraded state). Read-only and quota-free."""
+    payload = dict(_CAPABILITIES)
+    try:
+        conn = connect()
+        try:
+            status = data_source_status(conn).as_dict()
+        finally:
+            conn.close()
+        payload["data_source"] = status
+    except Exception as exc:  # noqa: BLE001 — capabilities must never 500
+        payload["data_source"] = {
+            "mode": "unknown",
+            "degraded": True,
+            "degraded_reason": f"status unavailable: {str(exc)[:200]}",
+        }
+    return payload
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -73,7 +97,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, {"status": "ok", "service": "edgewire-api"})
 
             if path == "/api/capabilities":
-                return self._send(200, _CAPABILITIES)
+                return self._send(200, _capabilities_payload())
 
             if path == "/api/ev-screen":
                 sport = qs.get("sport", [None])[0]
