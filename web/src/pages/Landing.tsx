@@ -24,7 +24,8 @@ export function Landing() {
     <section className="landing">
       {/* Hero */}
       <div className="hero">
-        <h1 className="hero-h1">Stop betting blind. See the edge — in real time.</h1>
+        <span className="hero-eyebrow"><span className="dot" aria-hidden="true" />The financial terminal for sports betting</span>
+        <h1 className="hero-h1">Stop betting blind. <span className="accent">See the edge</span> — in real time.</h1>
         <p className="hero-sub">
           EdgeWire monitors every major sportsbook and surfaces +EV opportunities,
           line movement, and the best available price the moment it appears.

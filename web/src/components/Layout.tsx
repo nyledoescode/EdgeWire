@@ -1,6 +1,7 @@
 import { NavLink, Outlet, Link } from 'react-router-dom'
 import { useTier } from '../auth/TierContext'
 import { ResponsibleGamblingBand } from './ResponsibleGamblingBand'
+import { Logo, LogoMark } from './Logo'
 import { COMPLIANCE } from '../config'
 import type { Tier } from '../types'
 
@@ -19,10 +20,8 @@ export function Layout() {
   return (
     <div className="app">
       <header className="topbar">
-        <Link to="/" className="brand">
-          <span className="brand-mark">⚡</span>
-          <span className="brand-name">EdgeWire</span>
-          <span className="brand-tag">Odds Intelligence</span>
+        <Link to="/" className="brand" aria-label="EdgeWire — Odds Intelligence, home">
+          <Logo />
         </Link>
         <nav className="nav">
           {NAV.map((n) => (
@@ -54,7 +53,7 @@ export function Layout() {
       <footer className="footer">
         <div className="footer-grid">
           <div>
-            <strong>EdgeWire</strong> is an odds-analytics and line-shopping tool.
+            <span className="footer-brand"><LogoMark size={22} /> <strong>EdgeWire</strong></span> is an odds-analytics and line-shopping tool.
             We surface expected value, line movement, and closing-line value from
             public sportsbook markets. We are <em>not</em> a tipster service and
             make <em>no</em> guaranteed-return claims. {COMPLIANCE.notBets}
