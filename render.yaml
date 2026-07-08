@@ -1,0 +1,54 @@
+# EdgeWire — Render Blueprint
+# Deploy the Python intelligence API from this monorepo.
+#
+# The API is pure Python stdlib (NO runtime pip deps). The build must NOT try to
+# install requirements.txt — that file intentionally does not exist. Only
+# requirements-dev.txt (pytest) exists, and it is not needed at runtime, so the
+# build command is a deliberate no-op.
+#
+# On first boot the service self-seeds an empty SQLite DB with the checked-in
+# MLB fixtures (see edgewire/ingest/bootstrap.py), so endpoints return real data
+# immediately (e.g. Red Sox +6.76% EV) with no manual init step.
+
+services:
+  - type: web
+    name: edgewire-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    # No runtime deps — keep the build a true no-op so Render never looks for a
+    # non-existent requirements.txt.
+    buildCommand: "python --version"
+    # serve() reads $PORT first (Render injects it), binds 0.0.0.0, and seeds
+    # the DB on boot. No inline-env hack needed in the start command.
+    startCommand: "python scripts/serve_api.py"
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      # Point the SQLite store at the persistent disk so the append-only
+      # odds/CLV time-series survives restarts and redeploys.
+      - key: EDGEWIRE_DB
+        value: /var/data/edgewire.db
+      # PORT is injected by Render automatically — do NOT set it here.
+      #
+      # THE_ODDS_API_KEY is added later by the owner to enable LIVE ingest.
+      # Until it exists, the app runs entirely on fixtures and never calls the
+      # paid API — no spend. When provisioned, add it here (sync:false so the
+      # secret is entered in the dashboard, not committed):
+      # - key: THE_ODDS_API_KEY
+      #   sync: false
+    disk:
+      name: edgewire-data
+      mountPath: /var/data
+      sizeGB: 1
+
+# ---------------------------------------------------------------------------
+# Live odds ingest (NOT deployed yet — inert until THE_ODDS_API_KEY exists)
+# ---------------------------------------------------------------------------
+# A Render disk can only be mounted by ONE service, so the ingest loop cannot be
+# a separate service sharing this disk. When we go live, the recommended path is
+# to run the poller as a background thread INSIDE this web service (single
+# process, single disk) gated on THE_ODDS_API_KEY, OR migrate the store to
+# Postgres (a data-layer swap only — see db/database.py) and add a standalone
+# `cron` service. Until the owner approves THE_ODDS_API_KEY there is no live
+# polling and no spend. See backend/docs/DEPLOY.md for the enable steps.
