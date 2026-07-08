@@ -41,8 +41,14 @@ def main() -> int:
     ap.add_argument("--source", choices=["fixture", "live"], default="fixture")
     ap.add_argument("--fixture-suffix", default="", help="e.g. _t2 for 2nd snapshot")
     ap.add_argument(
-        "--markets", default="h2h,spreads,totals",
-        help="comma-separated market keys",
+        "--markets", default=None,
+        help="comma-separated market keys (default: fixture=h2h,spreads,totals; "
+             "live=h2h only, to stay quota-frugal)",
+    )
+    ap.add_argument(
+        "--regions", default="us",
+        help="live only: comma-separated regions (default us; add eu to capture "
+             "Pinnacle — costs an extra region credit per market)",
     )
     args = ap.parse_args()
 
@@ -52,7 +58,11 @@ def main() -> int:
         print(f"Schema initialized at {conn.execute('PRAGMA database_list').fetchall()[0][2]}")
         return 0
 
-    markets = tuple(m.strip() for m in args.markets.split(",") if m.strip())
+    if args.markets:
+        markets = tuple(m.strip() for m in args.markets.split(",") if m.strip())
+    else:
+        # Quota-frugal live default (h2h only); full markets for offline fixtures.
+        markets = ("h2h",) if args.source == "live" else ("h2h", "spreads", "totals")
 
     if args.source == "fixture":
         provider = FixtureTheOddsAPIProvider()
@@ -74,9 +84,15 @@ def main() -> int:
             payload = _json.loads(fpath.read_text())
             result = FetchResult(events=_parse_events(payload))
     else:
-        from edgewire.providers.the_odds_api import TheOddsAPIProvider
-        provider = TheOddsAPIProvider()
-        result = provider.fetch_odds(args.sport, markets=markets)
+        # Live mode: on-demand, quota-frugal, gated on THE_ODDS_API_KEY. Delegates
+        # to refresh_live() which logs quota headers and degrades gracefully.
+        from edgewire.ingest.live import refresh_live, DEFAULT_REGIONS
+        regions = tuple(
+            r.strip() for r in getattr(args, "regions", "us").split(",") if r.strip()
+        ) or DEFAULT_REGIONS
+        res = refresh_live(conn, sport_key=args.sport, markets=markets, regions=regions)
+        print(json.dumps(res.__dict__, indent=2, default=list))
+        return 0 if res.ok else 1
 
     summary = ingest_fetch_result(
         conn, result, provider_name=provider.name, sport_key_hint=args.sport

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "capture_evt_1",
+    "sport_key": "baseball_mlb",
+    "sport_title": "MLB",
+    "commence_time": "2026-07-09T23:10:00Z",
+    "home_team": "Chicago Cubs",
+    "away_team": "St. Louis Cardinals",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2026-07-08T18:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-07-08T18:00:00Z",
+            "outcomes": [
+              {"name": "Chicago Cubs", "price": -125},
+              {"name": "St. Louis Cardinals", "price": 105}
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2026-07-08T18:01:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-07-08T18:01:00Z",
+            "outcomes": [
+              {"name": "Chicago Cubs", "price": -130},
+              {"name": "St. Louis Cardinals", "price": 110}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
