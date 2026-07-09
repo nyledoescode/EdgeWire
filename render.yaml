@@ -25,10 +25,16 @@ services:
     healthCheckPath: /api/health
     autoDeploy: true
     envVars:
-      # Point the SQLite store at the persistent disk so the append-only
-      # odds/CLV time-series survives restarts and redeploys.
+      # FREE TIER: no disk is mounted, so the SQLite store lives on the
+      # service's ephemeral filesystem (/tmp). This resets on every restart /
+      # redeploy — which is FINE on the current fixture data set: the app
+      # self-seeds the MLB fixtures into an empty DB on boot (see
+      # edgewire/ingest/bootstrap.py), so endpoints return real data
+      # immediately. To PERSIST the append-only odds/CLV time-series across
+      # restarts, upgrade to a paid Starter plan and re-enable the disk block
+      # below (and point this back at /var/data/edgewire.db).
       - key: EDGEWIRE_DB
-        value: /var/data/edgewire.db
+        value: /tmp/edgewire.db
       # PORT is injected by Render automatically — do NOT set it here.
       #
       # THE_ODDS_API_KEY is added later by the owner to enable LIVE ingest.
@@ -37,10 +43,18 @@ services:
       # secret is entered in the dashboard, not committed):
       # - key: THE_ODDS_API_KEY
       #   sync: false
-    disk:
-      name: edgewire-data
-      mountPath: /var/data
-      sizeGB: 1
+    # ---------------------------------------------------------------------
+    # PERSISTENT DISK — DISABLED ON FREE TIER
+    # Render rejects the Blueprint with "disks are not supported for free tier
+    # services". Free tier cannot mount disks, so the block below is commented
+    # out and the DB runs on ephemeral /tmp (self-seeds on boot — fine on
+    # fixtures). To persist odds/CLV history across restarts, upgrade to a
+    # paid Starter plan, uncomment this block, and point EDGEWIRE_DB back at
+    # /var/data/edgewire.db.
+    # disk:
+    #   name: edgewire-data
+    #   mountPath: /var/data
+    #   sizeGB: 1
 
 # ---------------------------------------------------------------------------
 # Live odds ingest (NOT deployed yet — inert until THE_ODDS_API_KEY exists)

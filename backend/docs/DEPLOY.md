@@ -7,8 +7,15 @@ serves fixture-backed MLB data today and swaps to live odds once
 ## Fastest path: Blueprint (recommended)
 The repo ships `render.yaml` at the root. In Render: **New → Blueprint → point at
 this repo**. It provisions the `edgewire-api` web service with the correct root
-dir, build/start commands, health check, a 1 GB persistent disk, and env vars.
-Nothing to type by hand.
+dir, build/start commands, health check, and env vars. Nothing to type by hand.
+
+> **Free tier: no persistent disk.** Render rejects a free-tier Blueprint that
+> declares a disk ("disks are not supported for free tier services"), so
+> `render.yaml` ships with the disk block **commented out** and `EDGEWIRE_DB`
+> pointed at ephemeral `/tmp/edgewire.db`. This resets on every restart /
+> redeploy, which is fine today: the app self-seeds the checked-in MLB fixtures
+> into an empty DB on boot, so endpoints return real data immediately. See
+> **Persistent disk** below for the paid-upgrade path to keep history.
 
 ## Manual setup (fallback — if you configure the service by hand)
 Create a **Web Service** from the repo with:
@@ -26,16 +33,23 @@ Create a **Web Service** from the repo with:
 > Render's default build tries `requirements.txt` and fails; override it with the
 > no-op `python --version`.
 
-### Persistent disk (required)
-Add a disk so the append-only odds/CLV time-series survives restarts:
-- **Mount path:** `/var/data`
-- **Size:** 1 GB
+### Persistent disk (paid plans only — optional today)
+**Free tier cannot mount a disk**, so leave the DB on ephemeral `/tmp` (it
+self-seeds fixtures on boot — no data loss that matters while we run on
+fixtures). To **persist** the append-only odds/CLV time-series across restarts
+you must upgrade to a paid **Starter** plan, then:
+- Uncomment the `disk:` block in `render.yaml` (or add a disk in the dashboard):
+  - **Mount path:** `/var/data`
+  - **Size:** 1 GB
+- Point `EDGEWIRE_DB` back at `/var/data/edgewire.db`.
+
+Nothing in the app changes — this is purely a storage/durability upgrade.
 
 ### Environment variables
 | Var                 | Value / note                                              |
 |---------------------|-----------------------------------------------------------|
 | `PORT`              | Injected by Render automatically — **do not set**. The app binds `$PORT` on `0.0.0.0`. |
-| `EDGEWIRE_DB`       | `/var/data/edgewire.db` (points SQLite at the disk)       |
+| `EDGEWIRE_DB`       | Free tier: `/tmp/edgewire.db` (ephemeral, self-seeds on boot). Paid+disk: `/var/data/edgewire.db`. |
 | `THE_ODDS_API_KEY`  | **Later, owner-provisioned.** Absent = fixture mode, zero API spend. |
 
 ## What happens on boot
