@@ -20,7 +20,7 @@ export function Layout() {
   return (
     <div className="app">
       <header className="topbar">
-        <Link to="/" className="brand" aria-label="EdgeWire — Odds Intelligence, home">
+        <Link to="/" className="brand" aria-label="BestBet — Odds Intelligence, home">
           <Logo />
         </Link>
         <nav className="nav">
@@ -53,7 +53,7 @@ export function Layout() {
       <footer className="footer">
         <div className="footer-grid">
           <div>
-            <span className="footer-brand"><LogoMark size={22} /> <strong>EdgeWire</strong></span> is an odds-analytics and line-shopping tool.
+            <span className="footer-brand"><LogoMark size={22} /> <strong>BestBet</strong></span> is an odds-analytics and line-shopping tool.
             We surface expected value, line movement, and closing-line value from
             public sportsbook markets. We are <em>not</em> a tipster service and
             make <em>no</em> guaranteed-return claims. {COMPLIANCE.notBets}
