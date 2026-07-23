@@ -84,9 +84,9 @@ export const COMPLIANCE = {
   helpline: '1-800-GAMBLER',
   helplineUrl: 'https://www.ncpgambling.org/',
   notBets:
-    'EdgeWire provides information and analytics only. We do not accept wagers, hold funds, or guarantee outcomes.',
+    'BestBet provides information and analytics only. We do not accept wagers, hold funds, or guarantee outcomes.',
   evFraming:
     'Everything here is probability and expected value — not a promise of profit. No tool can guarantee a win.',
   affiliate:
-    'Some sportsbook links may be affiliate links: EdgeWire may earn a commission if you sign up, at no cost to you. This never affects which prices or edges we show.',
+    'Some sportsbook links may be affiliate links: BestBet may earn a commission if you sign up, at no cost to you. This never affects which prices or edges we show.',
 }

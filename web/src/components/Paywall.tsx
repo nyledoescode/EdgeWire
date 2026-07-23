@@ -17,7 +17,7 @@ export function PaywallCard({
       <div className="paywall-badge">{LABEL[required]}</div>
       <h3>{feature} is a {LABEL[required]} feature</h3>
       <p>
-        Upgrade to unlock {feature.toLowerCase()}. EdgeWire is an analytics tool —
+        Upgrade to unlock {feature.toLowerCase()}. BestBet is an analytics tool —
         every insight is framed as expected value and probability, never a
         guaranteed outcome.
       </p>

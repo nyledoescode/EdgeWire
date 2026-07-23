@@ -1,4 +1,4 @@
-// EdgeWire shared data contract (frontend view).
+// BestBet shared data contract (frontend view).
 // These types describe exactly what the web app expects from the backend
 // intelligence API. The backend engineer should align response shapes to
 // these, or document deltas in API_CONTRACT.md so wiring stays trivial.

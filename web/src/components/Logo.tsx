@@ -1,5 +1,5 @@
 /**
- * EdgeWire brand mark — a crisp, ownable SVG logo.
+ * BestBet brand mark — a crisp, ownable SVG logo.
  *
  * Concept: a rising "edge" — three ascending bars forming an upward line-movement
  * motif, cut by a sharp diagonal signal line that reads as the market edge being
@@ -8,7 +8,7 @@
  * Delivered as inline SVG (no raster) so it's razor-sharp at any size and adds
  * ~1KB to the bundle. `size` controls the mark; the wordmark is optional.
  */
-export function LogoMark({ size = 26, title = 'EdgeWire' }: { size?: number; title?: string }) {
+export function LogoMark({ size = 26, title = 'BestBet' }: { size?: number; title?: string }) {
   return (
     <svg
       width={size}
@@ -50,7 +50,7 @@ export function Logo() {
     <span className="brand-lockup">
       <LogoMark size={26} />
       <span className="brand-wordmark">
-        <span className="brand-name">EdgeWire</span>
+        <span className="brand-name">BestBet</span>
         <span className="brand-tag">Odds Intelligence</span>
       </span>
     </span>

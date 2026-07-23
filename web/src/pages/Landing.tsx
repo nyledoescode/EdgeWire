@@ -27,7 +27,7 @@ export function Landing() {
         <span className="hero-eyebrow"><span className="dot" aria-hidden="true" />The financial terminal for sports betting</span>
         <h1 className="hero-h1">Stop betting blind. <span className="accent">See the edge</span> — in real time.</h1>
         <p className="hero-sub">
-          EdgeWire monitors every major sportsbook and surfaces +EV opportunities,
+          BestBet monitors every major sportsbook and surfaces +EV opportunities,
           line movement, and the best available price the moment it appears.
           Intelligence, not “guaranteed picks.”
         </p>
@@ -55,7 +55,7 @@ export function Landing() {
           <ul>{PROBLEM.map((p) => <li key={p}>{p}</li>)}</ul>
         </div>
         <div className="pp-card pp-promise">
-          <h3>The EdgeWire way</h3>
+          <h3>The BestBet way</h3>
           <ul>{PROMISE.map((p) => <li key={p}>{p}</li>)}</ul>
         </div>
       </div>
